@@ -1,6 +1,6 @@
 ## What does this acheive??
 
-It's similiar to [font-ranger](https://www.npmjs.com/package/font-ranger?activeTab=readme); it splits the desired font into subsets for faster loading. [See google fonts' for a short brief on subsetting](https://fonts.google.com/knowledge/glossary/subsetting)
+It's similiar to [font-ranger](https://www.npmjs.com/package/font-ranger?activeTab=readme); it splits the desired font into subsets for faster loading. [See google fonts' knowlegde base for a short brief on subsetting](https://fonts.google.com/knowledge/glossary/subsetting).
 
 ## What are the obstacles??
 
