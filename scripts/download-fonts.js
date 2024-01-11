@@ -6,7 +6,7 @@ import { hideBin } from 'yargs/helpers'
 
 const args = yargs(hideBin(process.argv))
   .option('local-base-dir', {
-    alias: 'ld',
+    alias: 'd',
     describe: 'Base-path in CSS\' src-descriptor'
   })
   .option('url', {
@@ -20,7 +20,7 @@ const vitePreviewServer = spawn('vite', ['--port', '8080'], {
   stdio: 'inherit',
   env: Object.assign(process.env, {
     VITE_GOOGLE_FONT_FACE_CSS_URL: args.u,
-    VITE_FONT_FACE_BASE_DIR: args.ld
+    VITE_FONT_FACE_BASE_DIR: args.d ?? ''
   })
 });
 

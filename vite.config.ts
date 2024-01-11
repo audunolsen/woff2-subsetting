@@ -8,7 +8,7 @@ console.log('Selected font:', googleFontUrl, '\n')
 export default defineConfig({
   define: {
     'import.meta.env.VITE_GOOGLE_FONT_FACE_CSS_URL': `"${googleFontUrl}"`,
-    'import.meta.env.VITE_FONT_FACE_BASE_DIR': `"${process.env.VITE_GOOGLE_FONT_FACE_CSS_URL}"`
+    'import.meta.env.VITE_FONT_FACE_BASE_DIR': `"${process.env.VITE_FONT_FACE_BASE_DIR ?? ''}"`
   },
   plugins: [
     {

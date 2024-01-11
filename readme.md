@@ -8,7 +8,7 @@ It's similiar to [font-ranger](https://www.npmjs.com/package/font-ranger?activeT
 
 ## How does it work??
 
-This spins up a webapp in headless browser through Puppeteer to intercept
+This spins up a webapp in headless browser through [Puppeteer](https://pptr.dev/) to intercept
 the font request responses and write the font-assets to the file system, essentially downloading them.
 
 Google utilises the [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range) descriptor of the CSS font-face rule. Google will only load parts of the font where the webpage contents include a unicode symbol that matches the specified unicode-range.
@@ -17,14 +17,16 @@ The clever part of this webapp is that it parses the font-face rules returned by
 
 ## How to use??
 
-Run `$ npm run fonts:download -u <google-font-face-styles-url>`.
+Run `$ npm run fonts:download -- -u <google-font-face-styles-url>`.
 
-The command requires an URL argument pointing to a google font-face style document. The font face stylesheet url can be found when browsing and selecting fonts on the google fonts webpage. See example below
+The command requires an URL argument (`--url` or `-u`) pointing to a google font-face stylesheet. The font face stylesheet url can be found when browsing and selecting fonts on the google fonts webpage.
 
-Source example
+Example of stylesheet link on Google Fonts
 ![image info](./ga-font-source-example.png)
 
-You can also pass `--local-base-dir` or `-ld` argument to prepend to the local paths of the downloaded font-face stylesheet.
+See [package.json](./package.json) for some font download presets/examples.
+
+You can also pass `--local-base-dir` or `-d` argument to prepend to the local paths of the downloaded font-face stylesheet.
 
 ## Misc notes
 
@@ -39,5 +41,8 @@ with the updates font-face rules~~ ✅
 
 - Expose bin and publish as package, right now this has to be cloned and run from cli inside project dir 
 
+### Additional resources
+
+- [Optimize web fonts (web.dev)](https://web.dev/learn/performance/optimize-web-fonts)
 
 
