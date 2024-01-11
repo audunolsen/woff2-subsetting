@@ -2,10 +2,11 @@ import './style.css'
 import { getFontFaces } from './get-font-faces'
 
 getFontFaces().then(res => {
-  console.log('res', res)
-
-  document.head.innerHTML += `\n<style>\n${res.cssDocString}\n</style>`
+  document.head.innerHTML += `\n<style>\n${res.stylesheets.external}\n</style>`
   const app = document.querySelector<HTMLDivElement>('#app')!
+
+  // We can console.log to facilitate Puppeteer intercepting the finalized local stylesheet
+  console.log(res.stylesheets.local)
 
   for (const meta of res.fontFacesMeta)
     app.innerHTML += `

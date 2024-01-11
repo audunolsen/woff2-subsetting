@@ -13,8 +13,7 @@ the font request responses and write the font-assets to the file system, essenti
 
 Google utilises the [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range) descriptor of the CSS font-face rule. Google will only load parts of the font where the webpage contents include a unicode symbol that matches the specified unicode-range.
 
-The clever part of this solution is that it parses the font-face rules returned by google and outputs to the webapp all the found unicode-ranges to spawn *all* the possible requests for a font. Because google's font asset CDN links are cryptic and not unique for each subset, there's some content negotiation between the client ann cdn that determine what variation of the font the client is requesting, to better identify what font is requested, the client-app also assigns some URL params to the 
-font-requests for easier handling in the download-phase.
+The clever part of this webapp is that it parses the font-face rules returned by google and outputs to the webapp all the found unicode-ranges to spawn *all* the possible requests for a font. Because google's font asset CDN links are cryptic and not unique for each subset, there's some content negotiation between the client ann cdn that determine what variation of the font the client is requesting, to better identify what font is requested, the client-app also assigns some URL params to the font-requests for easier handling in the download-phase.
 
 ## How to use??
 
@@ -27,7 +26,16 @@ Source example
 
 ## Misc notes
 
-- The duration of the font-downloading is very variable depending on the quantity of fonts, I don't care to track the progress to make the script exit on its own. Just keep an eye on the terminal output/terminal and terminate the script yourself when happy w/ the result
+- The duration of the font-downloading is very variable depending on the quantity of fonts, I don't care to track the progress to make the script exit on its own. Just keep an eye on the terminal output/terminal and terminate the script yourself when happy w/ the result. The silver lining here it that you can open the webapp and preview the fonts and all their variants in the webapp.
 
 - This app is very brittle and probably very prone to breaking should google structure their response data differently. This was last successfylly tested in Jan 2024
+
+## Todos
+
+- ~~Shold probably keep the unicode ranges and download them as well, or maybe just write an updated css document
+with the updates font-face rules~~ ✅
+
+- Expose bin and publish as package, right now this has to be cloned and run from cli inside project dir 
+
+
 

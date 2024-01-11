@@ -16,8 +16,6 @@ export async function getFontFaces() {
    */
   const res = await fetch(import.meta.env.VITE_GOOGLE_FONT_FACE_CSS_URL).then(res => res.text())
 
-  // console.log('FONT', import.meta.env.VITE_GOOGLE_FONT_FACE_CSS_URL)
-
   /**
    * This matches the comment header and css font face rule for each subset
    */
@@ -39,17 +37,20 @@ export async function getFontFaces() {
     }
 
     const targetedSymbols = ranges.map(parseRange).flat()
-    console.log('selector', subset, targetedSymbols)
-
 
     /** Make URL request sent to ga more readable, useful when retieving the font asset */
     url.searchParams.append('family', family)
     url.searchParams.append('weight', weight)
     url.searchParams.append('style', style)
-    url.searchParams.append('family', family)
     url.searchParams.append('subset', subset)
 
-    const updatedCss = css.join('\n').replace(/(?<=url\().+(?=\)\s)/, url.toString())
+    const localFontfilename = [
+      import.meta.env.VITE_FONT_FACE_BASE_DIR,
+      `${family.toLowerCase().split(' ').join('-')}-${weight}-${style}-${subset}.woff2`
+    ].filter(Boolean).join('/')
+    
+    const fontFaceExternal = css.join('\n').replace(/(?<=url\().+(?=\)\s)/, `'${url.toString()}'`)
+    const fontFaceLocal = css.join('\n').replace(/(?<=url\().+(?=\)\s)/, `'${localFontfilename}'`)
 
     return {
       subset,
@@ -57,26 +58,35 @@ export async function getFontFaces() {
       style,
       weight,
       url,
-      updatedCss,
+      fontFaceExternal,
+      fontFaceLocal,
       targetedSymbols
     }
   })
 
-  const cssDocString = fontFacesMeta.map(e => e.updatedCss).join('\n')
+  const stylesheets = {
+    /** Uses local file-paths, this is used by Puppeteer during download phase */
+    local: ["/* font-face-local-assets-stylesheet */", fontFacesMeta.map(e => e.fontFaceLocal)]
+      .flat()
+      .join('\n'),
 
-  if (!fontFacesMeta.length || !cssDocString) {
+    /** Uses external file-paths-urls to google's CDN */
+    external: fontFacesMeta.map(e => e.fontFaceExternal).join('\n')
+  }
+
+  if (!fontFacesMeta.length) {
     throw new Error('Could not retrieve any font data')
   }
 
-  return { fontFacesMeta, cssDocString }
+  return { fontFacesMeta, stylesheets }
 }
 
 /**
-  * U+26 — single code point
-  * U+0-7F
-  * U+0025-00FF — code point range
-  * U+4?? — wildcard range
-  * U+0025-00FF, U+4?? — multiple values
+  * `U+26` — single code point
+  * `U+0-7F`
+  * `U+0025-00FF` — code point range
+  * `U+4??` — wildcard range
+  * `U+0025-00FF, U+4??` — multiple values
   */
 function parseRange(range: string) {
   range = range.replace(/^U\+/, '')
