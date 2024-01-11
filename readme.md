@@ -19,7 +19,7 @@ The clever part of this webapp is that it parses the font-face rules returned by
 
 Run `$ npm run fonts:download -- -u <google-font-face-styles-url>`.
 
-The command requires an URL argument (`--url` or `-u`) pointing to a google font-face stylesheet. The font face stylesheet url can be found when browsing and selecting fonts on the google fonts webpage.
+The command requires an URL argument (`--url` or `-u`) pointing to a font-face stylesheet produced by Google Fonts. The font face stylesheet url can be found when browsing and selecting fonts on Google Fonts.
 
 Example of stylesheet link on Google Fonts
 ![image info](./ga-font-source-example.png)
@@ -30,9 +30,9 @@ You can also pass `--local-base-dir` or `-d` argument to prepend to the local pa
 
 ## Misc notes
 
-- The duration of the font-downloading is very variable depending on the quantity of fonts, I don't care to track the progress to make the script exit on its own. Just keep an eye on the terminal output/terminal and terminate the script yourself when happy w/ the result. The silver lining here it that you can open the webapp and preview the fonts and all their variants in the webapp.
+- The duration of the font-downloading is very variable depending on the quantity of fonts, I don't care to track the progress to make the script exit on its own. Just keep an eye on the terminal output/file system and terminate the script yourself when happy with the results. The silver lining here it that you can open the webapp and preview the fonts and all their variants in the webapp.
 
-- This app is very brittle and probably very prone to breaking should google structure their response data differently. This was last successfylly tested in Jan 2024
+- This app is very brittle and probably very prone to breaking should google structure their response data differently. This was last successfylly tested in Jan 2024.
 
 ## Todos
 
