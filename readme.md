@@ -17,12 +17,14 @@ The clever part of this webapp is that it parses the font-face rules returned by
 
 ## How to use??
 
-Run `$ npm run fonts:download <google-font-face-styles-url>`.
+Run `$ npm run fonts:download -u <google-font-face-styles-url>`.
 
 The command requires an URL argument pointing to a google font-face style document. The font face stylesheet url can be found when browsing and selecting fonts on the google fonts webpage. See example below
 
 Source example
 ![image info](./ga-font-source-example.png)
+
+You can also pass `--local-base-dir` or `-ld` argument to prepend to the local paths of the downloaded font-face stylesheet.
 
 ## Misc notes
 
