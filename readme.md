@@ -41,6 +41,9 @@ with the updates font-face rules~~ ✅
 
 - Expose bin and publish as package, right now this has to be cloned and run from cli inside project dir 
 
+- Output some JSON meta
+- Split font-face files based on family for narrowed choosing of wanted fonts from a greater selection
+
 ### Additional resources
 
 - [Optimize web fonts (web.dev)](https://web.dev/learn/performance/optimize-web-fonts)
